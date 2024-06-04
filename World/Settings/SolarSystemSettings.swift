@@ -15,23 +15,23 @@ struct SolarSystemSettings: View {
         @Bindable var model = model
         
         VStack {
-            Text("Solar system module debug settings")
+            Text("Solar system module debug settings", comment: "The title of the settings presented to the viewer.")
                 .font(.title)
             Form {
                 EarthSettings(configuration: $model.solarEarth)
                 SatelliteSettings(configuration: $model.solarSatellite)
                 SatelliteSettings(configuration: $model.solarMoon)
-                Section("Sun") {
+                Section(String(localized: "Sun", comment: "Section title of settings for the sun.")) {
                     Grid(alignment: .leading, verticalSpacing: 20) {
                         SliderGridRow(
-                            title: "Distance to Earth",
+                            title: String(localized: "Distance to Earth"),
                             value: $model.solarSunDistance,
                             range: 0 ... 1e3)
                     }
                 }
-                Section("System") {
+                Section(String(localized: "System", comment: "Section title of system level settings.")) {
                     Grid(alignment: .leading, verticalSpacing: 20) {
-                        Button("Reset") {
+                        Button(String(localized: "Reset", comment: "Action to reset all settings to their defaults.")) {
                             model.solarEarth = .solarEarthDefault
                             model.solarSatellite = .solarTelescopeDefault
                             model.solarMoon = .solarMoonDefault

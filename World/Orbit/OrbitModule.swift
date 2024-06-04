@@ -15,7 +15,16 @@ private let modelDepth: Double = 200
 private enum Item: String, CaseIterable, Identifiable {
     case satellite, moon, telescope
     var id: Self { self }
-    var name: String { rawValue.capitalized }
+    var name: String {
+        switch self {
+        case .satellite:
+            String(localized: "Satellite", comment: "An object in orbit around Earth.")
+        case .moon:
+            String(localized: "Moon", comment: "An object in orbit around Earth.")
+        case .telescope:
+            String(localized: "Telescope", comment: "A space telescope in orbit around Earth.")
+        }
+    }
 }
 
 /// The module detail content that's specific to the orbit module.
@@ -59,7 +68,7 @@ private struct ItemView: View {
     var orientation: SIMD3<Double> = .zero
 
     var body: some View {
-        Model3D(named: item.name, bundle: worldAssetsBundle) { model in
+        Model3D(named: item.rawValue.capitalized, bundle: worldAssetsBundle) { model in
             model.resizable()
                 .scaledToFit()
                 .rotation3DEffect(

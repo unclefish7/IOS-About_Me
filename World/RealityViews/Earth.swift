@@ -58,6 +58,7 @@ struct Earth: View {
         satelliteConfiguration: [
             SatelliteEntity.Configuration(
                 name: "Satellite",
+                displayName: "Satellite",
                 isVisible: true,
                 inclination: .degrees(30),
                 speedRatio: 10,

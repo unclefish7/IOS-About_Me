@@ -15,14 +15,16 @@ struct GlobeSettings: View {
         @Bindable var model = model
         
         VStack {
-            Text("Globe module debug settings")
+            Text("Globe module debug settings", comment: "The title of the settings presented to the viewer.")
                 .font(.title)
             Form {
                 EarthSettings(configuration: $model.globeEarth)
-                Section("System") {
+                Section(String(localized: "System", comment: "Section title of system level settings.")) {
                     Grid(alignment: .leading, verticalSpacing: 20) {
-                        Button("Reset") {
+                        Button {
                             model.globeEarth = .globeEarthDefault
+                        } label: {
+                            Text("Reset", comment: "Action to reset the settings to their default values.")
                         }
                     }
                 }

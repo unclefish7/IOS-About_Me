@@ -17,7 +17,7 @@ struct ModuleDetail: View {
         @Bindable var model = model
 
         GeometryReader { proxy in
-            let textWidth = min(max(proxy.size.width * 0.4, 300), 500)
+            let textWidth = min(max(proxy.size.width * 0.4, module == .orbit ? 500 : 300), 500)
             let imageWidth = min(max(proxy.size.width - textWidth, 300), 700)
             ZStack {
                 HStack(spacing: 60) {
@@ -28,7 +28,7 @@ struct ModuleDetail: View {
                             .accessibilitySortPriority(4)
 
                         Text(module.overview)
-                            .padding(.bottom, 30)
+                            .padding(.bottom, 24)
                             .accessibilitySortPriority(3)
 
                         switch module {
@@ -46,11 +46,11 @@ struct ModuleDetail: View {
                     module.detailView
                         .frame(width: imageWidth, alignment: .center)
                 }
-                .offset(y: -30)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .padding(70)
+        .padding([.leading, .trailing], 70)
+        .padding(.bottom, 24)
         .background {
             if module == .solar {
                 Image("SolarBackground")

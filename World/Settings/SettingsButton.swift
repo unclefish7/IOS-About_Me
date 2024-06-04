@@ -45,13 +45,17 @@ private struct SettingsButtonModifier: ViewModifier {
                 Button {
                     showSettings = true
                 } label: {
-                    Label("Settings", systemImage: "gear")
-                        .labelStyle(.iconOnly)
+                    Label {
+                        Text("Settings")
+                    } icon: {
+                        Image(systemName: "gear")
+                    }
+                    .labelStyle(.iconOnly)
                 }
                 .popover(isPresented: $showSettings) {
                     module.settingsView
                         .padding(.vertical)
-                        .frame(width: 500, height: 400)
+                        .frame(width: 600, height: 400)
                 }
             }
     }

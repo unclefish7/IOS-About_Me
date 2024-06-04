@@ -211,24 +211,37 @@ class EarthEntity: Entity {
         axComponent.label = "Earth model"
 
         // Add a value that describes the model's current state.
-        var axValue = configuration.currentSpeed != 0 ? "Rotating, " : "Not rotating, "
-        axValue.append(configuration.showSun ? "with the sun shining, " : "with the sun not shining, ")
+        var axValueComponents = [String]()
+        axValueComponents.append(configuration.currentSpeed != 0
+                                 ? String(localized: "Rotating.", comment: "Describes an attribute of the Earth model.")
+                                 : String(localized: "Not rotating.", comment: "Describes an attribute of the Earth model."))
+        axValueComponents.append(configuration.showSun
+                                 ? String(localized: "The sun is shining.", comment: "Describes an attribute of the Earth model.")
+                                 : String(localized: "The sun is not shining.", comment: "Describes an attribute of the Earth model."))
         if configuration.axDescribeTilt {
             if let dateString = configuration.date?.formatted(.dateTime.day().month(.wide)) {
-                axValue.append("and tilted for the date \(dateString)")
+                axValueComponents.append(String(localized: "The Earth is tilted for the date \(dateString).",
+                                                comment: "Describes an attribute of the Earth model."))
             } else {
-                axValue.append("and no tilt")
+                axValueComponents.append(String(localized: "The Earth is not tilted.", comment: "Describes an attribute of the Earth model."))
             }
         }
         if configuration.showPoles {
-            axValue.append("with the poles indicated, ")
+            axValueComponents.append(String(localized: "The poles indicated.", comment: "Describes an attribute of the Earth model."))
         }
         for item in satelliteConfiguration.map({ $0.name }) {
-            axValue.append("a \(item) orbits close to the earth, ")
+            axValueComponents.append(String(localized: "A \(item) orbits close to the earth.",
+                                            comment: "Describes an attribute of the Earth model. The first parameter is any satellite."))
         }
         if moonConfiguration != nil {
-            axValue.append("the moon orbits at some distance from the earth.")
+            axValueComponents.append(String(localized: "The moon orbits at some distance from the earth.",
+                                            comment: "Describes an attribute of the Earth model."))
         }
+        let axValue = axValueComponents.joined(separator: String(localized: " ",
+                                                                 comment: """
+                                                                          Separator between accessibility description components.
+                                                                          This separator is a space to separate the sentences.
+                                                                          """))
         axComponent.value = LocalizedStringResource(stringLiteral: axValue)
 
         // Add custom accessibility actions, if applicable.

@@ -15,13 +15,13 @@ struct OrbitSettings: View {
         @Bindable var model = model
 
         VStack {
-            Text("Orbit module debug settings")
+            Text("Orbit module debug settings", comment: "The title of the settings presented to the viewer.")
                 .font(.title)
             Form {
                 EarthSettings(configuration: $model.orbitEarth)
                 SatelliteSettings(configuration: $model.orbitSatellite)
                 SatelliteSettings(configuration: $model.orbitMoon)
-                Section("System") {
+                Section(String(localized: "System", comment: "Section title of system level settings.")) {
                     Grid(alignment: .leading, verticalSpacing: 20) {
                         Button("Reset") {
                             model.orbitEarth = .orbitEarthDefault

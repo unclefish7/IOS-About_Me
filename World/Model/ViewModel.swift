@@ -15,7 +15,7 @@ class ViewModel {
     var navigationPath: [Module] = []
     var titleText: String = ""
     var isTitleFinished: Bool = false
-    var finalTitle: String = "Hello World"
+    var finalTitle: String = String(localized: "Hello World", comment: "The title of the app.")
 
     // MARK: - Globe
     var isShowingGlobe: Bool = false

@@ -68,7 +68,7 @@ private struct GlobeTiltPicker: View {
 
     var body: some View {
         Grid(alignment: .leading) {
-            Text("Tilt")
+            Text("Tilt", comment: "The tilt of the Earth's axis.")
                 .font(.title)
                 .padding(.top, 5)
                 .gridCellAnchor(.center)
@@ -136,11 +136,11 @@ enum GlobeTilt: String, CaseIterable, Identifiable {
 
     var name: String {
         switch self {
-        case .none: "None"
-        case .march: "March equinox"
-        case .june: "June solstice"
-        case .september: "September equinox"
-        case .december: "December solstice"
+        case .none: String(localized: "None", comment: "No tilt to the Earth's axis.")
+        case .march: String(localized: "March equinox", comment: "Tilt the Earth to the March equinox.")
+        case .june: String(localized: "June solstice", comment: "Tilt the Earth to the June solstice.")
+        case .september: String(localized: "September equinox", comment: "Tilt the Earth to the September equinox.")
+        case .december: String(localized: "December solstice", comment: "Tilt the Earth to the December solstice.")
         }
     }
 }
